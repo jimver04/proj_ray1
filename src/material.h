@@ -15,6 +15,9 @@ class material {
 };
 
 class lambertian : public material {
+  private:
+    color albedo;
+
   public:
     lambertian(const color& albedo) : albedo(albedo) {}
 
@@ -31,8 +34,24 @@ class lambertian : public material {
         return true;
     }
 
+
+};
+
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+class metal : public material {
   private:
     color albedo;
+  public:
+    metal(const color& albedo) : albedo(albedo) {}
+
+    bool scatter(const ray& r_in, const hit_record& rec, color& attenuation, ray& scattered)
+    const override {
+        vec3 reflected = reflect(r_in.direction(), rec.normal);
+        scattered = ray(rec.p, reflected);
+        attenuation = albedo;
+        return true;
+    }
 };
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 #endif

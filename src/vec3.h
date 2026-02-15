@@ -124,4 +124,9 @@ inline vec3 random_unit_vector() {
     }
 }
 
+// calculate the reflection vector of the viewing direction
+inline vec3 reflect(const vec3& v, const vec3& n) {
+    return v - 2*dot(v,n)*n;
+}
+
 #endif
