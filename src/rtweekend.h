@@ -35,6 +35,7 @@ inline double random_double(double min, double max) {
 }
 //================================================
 
+
 // Common Headers
 #include "interval.h"
 #include "color.h"
