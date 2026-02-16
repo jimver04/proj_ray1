@@ -13,10 +13,6 @@ private:
     vec3   pixel_delta_v;  // Offset to pixel below
     double pixel_samples_scale;
 
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    double vfov = 90;  // Vertical view angle (field of view)
-    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 
     void initialize() {
         image_height = int(image_width / aspect_ratio);
@@ -107,9 +103,11 @@ public:
     double aspect_ratio = 1.0;  // Ratio of image width over height
     int    image_width  = 100;  // Rendered image width in pixel count
     int    samples_per_pixel = 10; 
-    // ===================================
     int    max_depth = 10;   // Maximum number of ray bounces into scene
-    // ===================================
+
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    double vfov = 90;  // Vertical view angle (field of view)
+    // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
     void render(const hittable& world) {
