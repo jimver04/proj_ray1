@@ -2,16 +2,16 @@
 #define HITTABLE_H
 
 #include "ray.h"
+#include "aabb.h" // <<<<<<<<<<<<<<<<<<<<<<<<<
 
-class material;  // <<<<<<<<<<<<<<<<<<<<<<<<<
+class material;  
 
 
 class hit_record {
   public:
     point3 p;
     vec3 normal;
-    shared_ptr<material> mat; // <<<<<<<<<<<<<<<<<<<<<<<<<
-
+    shared_ptr<material> mat; 
     double t;
 
     // if the intersected face orients to the viewer
@@ -39,6 +39,10 @@ class hittable {
     
     //virtual bool hit(const ray& r, double ray_tmin, double ray_tmax, hit_record& rec) const = 0;
     virtual bool hit(const ray& r, interval ray_t, hit_record& rec) const = 0;
+
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    virtual aabb bounding_box() const = 0;
+    //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 };
 
 #endif

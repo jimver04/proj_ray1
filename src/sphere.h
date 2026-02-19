@@ -8,13 +8,29 @@ class sphere : public hittable {
   private:
     point3 center;
     double radius;
-    shared_ptr<material> mat; // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    shared_ptr<material> mat; 
+    aabb bbox;  // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     
   public:
-    // sphere(const point3& center, double radius) : center(center), radius(std::fmax(0,radius)) { }
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
     sphere(const point3& center, double radius, shared_ptr<material> mat)
-      : center(center), radius(std::fmax(0,radius)), mat(mat) {}
+    //  : center(center), radius(std::fmax(0,radius)), mat(mat) {}
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    /* use static_center if have done motion blur 
+    : center(static_center, vec3(0,0,0)), radius(std::fmax(0,radius)), mat(mat)
+    {
+        auto rvec = vec3(radius, radius, radius);
+        bbox = aabb(static_center - rvec, static_center + rvec);
+    }
+    */
+    // otherwise stick to center
+    : center(center), radius(std::fmax(0,radius)), mat(mat)
+    {
+        auto rvec = vec3(radius, radius, radius);
+        bbox = aabb(center - rvec, center + rvec);
+    }
+
+    aabb bounding_box() const override { return bbox; }
     // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     //bool hit(const ray& r, double ray_tmin, double ray_tmax, hit_record& rec) const override {
