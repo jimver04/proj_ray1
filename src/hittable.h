@@ -2,7 +2,7 @@
 #define HITTABLE_H
 
 #include "ray.h"
-#include "aabb.h" // <<<<<<<<<<<<<<<<<<<<<<<<<
+#include "aabb.h" 
 
 class material;  
 
@@ -13,6 +13,9 @@ class hit_record {
     vec3 normal;
     shared_ptr<material> mat; 
     double t;
+    
+    double u; // <<<<<<<<<<<<<<<<<<<<<<<<<
+    double v; // <<<<<<<<<<<<<<<<<<<<<<<<<
 
     // if the intersected face orients to the viewer
     bool front_face;
