@@ -6,13 +6,38 @@
 #include "hittable_list.h"
 #include "material.h" 
 #include "sphere.h"
-#include "texture.h" // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+#include "texture.h" 
 
+
+void earth() {
+
+    auto earth_texture = make_shared<image_texture>("earthmap.jpg");
+    auto earth_surface = make_shared<lambertian>(earth_texture);
+    auto globe = make_shared<sphere>(point3(0,0,0), 2, earth_surface);
+
+    camera cam;
+
+    cam.aspect_ratio      = 16.0 / 9.0;
+    cam.image_width       = 400;
+    cam.samples_per_pixel = 100;
+    cam.max_depth         = 50;
+
+    cam.vfov     = 20;
+    cam.lookfrom = point3(0,0,12);
+    cam.lookat   = point3(0,0,0);
+    cam.vup      = vec3(0,1,0);
+
+    cam.defocus_angle = 0;
+
+    cam.render(hittable_list(globe));
+}
 
 
 int main() {
 
-    hittable_list world;
+    earth();
+
+    // hittable_list world;
 
     /*
     auto material_ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));
@@ -56,6 +81,7 @@ int main() {
     
     */
 
+    /*
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     // auto ground_material = make_shared<lambertian>(color(0.5, 0.5, 0.5));
     // world.add(make_shared<sphere>(point3(0,-1000,0), 1000, ground_material));
@@ -91,6 +117,9 @@ int main() {
         }
     }
 
+    */
+
+    /*
     auto material1 = make_shared<dielectric>(1.5);
     world.add(make_shared<sphere>(point3(0, 1, 0), 1.0, material1));
 
@@ -101,8 +130,6 @@ int main() {
     world.add(make_shared<sphere>(point3(4, 1, 0), 1.0, material3));
     
     
-
-
 
     camera cam;
 
@@ -123,5 +150,5 @@ int main() {
     cam.focus_dist    = 10.0;
 
     cam.render(world);
-
+    */
 }

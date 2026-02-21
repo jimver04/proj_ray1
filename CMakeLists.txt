@@ -23,4 +23,13 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(ray01 src/main.cpp)
 
 # specify include directories
-#target_include_directories(ray01 PRIVATE include )
+target_include_directories(ray01 PRIVATE include)
+
+# copy the images folder 
+add_custom_command(
+        TARGET ray01 POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+		"${CMAKE_CURRENT_SOURCE_DIR}/images"
+                $<TARGET_FILE_DIR:run01>/models         
+        )
+
